@@ -1,21 +1,21 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Toolbar, Typography, IconButton, Stack } from "@mui/material";
 import logo_transparent from "../assets/logo_transparent.png";
 
-const pages = ["Liste", "Ajoute"];
+const pages = ["Ajoute", "Liste"];
 
-function ResponsiveAppBar() {
+const Navbar = () => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#fff", width: "100%" }}>
       <Toolbar
         sx={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          boxShadow: "0px 1px 0px #E2E2E2",
         }}
       >
         <Stack
@@ -32,13 +32,14 @@ function ResponsiveAppBar() {
             color="inherit"
             aria-label="logo"
           >
-            <img src={logo_transparent} alt="" />
+            {" "}
+            <img src={logo_transparent} alt="" />{" "}
           </IconButton>
-
           <Typography
             sx={{ color: "#438FFE", fontSize: "20px", margin: "10px" }}
           >
-            For Big Techos
+            {" "}
+            For Big Techos{" "}
           </Typography>
         </Stack>
 
@@ -46,10 +47,16 @@ function ResponsiveAppBar() {
           {pages.map((page) => (
             <Button key={page} sx={{ my: 2, color: "white", display: "block" }}>
               <Link
-                style={{ textDecoration: "none", color: "black" }}
+                style={{
+                  textDecoration: "none",
+                  color: "#438FFE",
+                  fontSize: "20px",
+                  borderBottom: "solid",
+                }}
                 to={`/${page}`}
               >
-                {page}
+                {" "}
+                {page}{" "}
               </Link>
             </Button>
           ))}
@@ -57,8 +64,8 @@ function ResponsiveAppBar() {
       </Toolbar>
     </AppBar>
   );
-}
-export default ResponsiveAppBar;
+};
+export default Navbar;
 
 // import * as React from "react";
 // import AppBar from "@mui/material/AppBar";
@@ -74,13 +81,32 @@ export default ResponsiveAppBar;
 //   return (
 //     <AppBar position="static" sx={{ backgroundColor: "#fff" }}>
 //       <Toolbar
-//         sx={{display: "flex",flexDirection: "row",justifyContent: "space-between"}}>
-//         <Stack sx={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center",}}>
-//           <IconButton size="large" edge="start" color="inherit" aria-label="logo">
+//         sx={{
+//           display: "flex",
+//           flexDirection: "row",
+//           justifyContent: "space-between",
+//         }}
+//       >
+//         <Stack
+//           sx={{
+//             display: "flex",
+//             flexDirection: "row",
+//             justifyContent: "center",
+//             alignItems: "center",
+//           }}
+//         >
+//           <IconButton
+//             size="large"
+//             edge="start"
+//             color="inherit"
+//             aria-label="logo"
+//           >
 //             <img src={logo_transparent} alt="" />
 //           </IconButton>
 
-//           <Typography sx={{ color: "#438FFE", fontSize: "20px", margin: "10px" }}>
+//           <Typography
+//             sx={{ color: "#438FFE", fontSize: "20px", margin: "10px" }}
+//           >
 //             For Big Techos
 //           </Typography>
 //         </Stack>
@@ -88,7 +114,12 @@ export default ResponsiveAppBar;
 //         <Stack direction="row" spacing={2}>
 //           {pages.map((page) => (
 //             <Button key={page} sx={{ my: 2, color: "white", display: "block" }}>
-//               <Link style={{ textDecoration: "none", color: "black" }} to={`/${page}`}>{page}</Link>
+//               <Link
+//                 style={{ textDecoration: "none", color: "black" }}
+//                 to={`/${page}`}
+//               >
+//                 {page}
+//               </Link>
 //             </Button>
 //           ))}
 //         </Stack>
