@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Toolbar, Typography, IconButton, Stack } from "@mui/material";
 import logo_transparent from "../assets/logo_transparent.png";
 
-const pages = ["Ajoute", "Liste"];
+const pages = ["add", "list"];
 
 const Navbar = () => {
   return (

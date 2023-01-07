@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route
-          path="Liste"
+          path="list"
           element={
             <Updatdelete
               onBackBtnClickHnd={function (): void {
@@ -42,7 +42,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="Ajoute"
+          path="add"
           element={
             <Add
               onBackBtnClickHnd={function (): void {

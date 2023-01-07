@@ -157,7 +157,7 @@ export default function Updatdelete(props: Props) {
             onClick={onBackBtnClickHnd}
             color="success"
           >
-            Suprimer
+            Supprimer
           </Button>
           <Button
             variant="contained"
@@ -170,7 +170,7 @@ export default function Updatdelete(props: Props) {
             }}
             onClick={onSubmitBtnClickHnd}
           >
-            Envoter
+            Envoyer
           </Button>
         </Box>
       </Box>

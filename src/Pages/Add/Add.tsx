@@ -3,6 +3,9 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { IEmployee } from "../../componants/Employee.type";
+import {CreateEmployeeDTO} from "../../service/employee/employee.type";
+import {createEmployee} from "../../service/employee/employee.service";
+import {useInRouterContext, useNavigate} from "react-router-dom";
 
 type Props = {
   onBackBtnClickHnd: () => void;
@@ -15,6 +18,8 @@ export default function Add(props: Props) {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [password, setpassword] = useState("");
+
+  const router = useNavigate()
   console.log(firstname);
   console.log(lastname);
   console.log(email);
@@ -39,20 +44,20 @@ export default function Add(props: Props) {
     setpassword(e.target.value);
   };
 
-  const onSubmitBtnClickHnd = (e: any) => {
+  const onSubmitBtnClickHnd = async (e: any) => {
     e.preventDefault();
 
-    const data: IEmployee = {
-      id: new Date().toJSON().toString(),
-      firstName: firstname,
-      lastName: lastname,
+    const data: CreateEmployeeDTO = {
+      name: firstname,
+      surname: lastname,
       email: email,
-      Numéro: number,
       password: password,
+        phoneNumber: number
     };
 
-    onSubmitClickHnd(data);
-    console.log(data);
+    await createEmployee(data)
+
+    return router("/")
   };
 
   const { onSubmitClickHnd, onBackBtnClickHnd } = props;
@@ -192,7 +197,7 @@ export default function Add(props: Props) {
 
 {
   /* <Box
-sx={{ width: "1192px", display: "flex", flexDirection: "column", justifyContent: "space-evenly", 
+sx={{ width: "1192px", display: "flex", flexDirection: "column", justifyContent: "space-evenly",
 alignItems: "center", margin: "0 auto", marginTop: "20px", backgroundColor: "#8d6e63", height: "442px",
 }}>
 <Box sx={{display: "flex",flexDirection: "row",width: "100%",justifyContent: "center",alignItems: "center",}}>
