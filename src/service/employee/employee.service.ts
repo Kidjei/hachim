@@ -2,8 +2,8 @@ import {CreateEmployeeDTO, IEmployee} from "./employee.type";
 
 const BASE_URL = "https://17uta8rjoa.execute-api.eu-west-1.amazonaws.com/Stage/v1"
 
-export async function getAllEmployee(limit: number, page: number): Promise<{lastEvaluatedKey: string, data: IEmployee[]}> {
-    const resp  = await fetch(`${BASE_URL}/admin?limit=${limit}&page=${page}`, {
+export async function getAllEmployee(limit: number, lastEK: string | undefined): Promise<{lastEvaluatedKey: string, data: IEmployee[]}> {
+    const resp  = await fetch(`${BASE_URL}/admin?limit=${limit}&lastEvaluatedKey=${lastEK}`, {
         headers: {
             'x-api-key': "test",
             "content-type": "application/json"

@@ -11,19 +11,40 @@ import EmployeeTable from "./ui/EmployeeTable";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
+import {deflateRaw} from "zlib";
 
 export default function Home() {
     const [employeeList, setEmployeeList] = useState(
         [] as IEmployee[]
     );
+    const [rowPerPage, setRowPerPage] = useState(10)
+    const [lastEK, setLastEK] = useState("")
+    const [prevLastEK, setPrevLastEK] = useState<string[]>([""])
 
     useEffect(() => {
         (async () => {
-            const response = await getAllEmployee(10, 1)
+            const response = await getAllEmployee(rowPerPage, undefined)
             setEmployeeList(response.data)
+            setLastEK(response.lastEvaluatedKey)
         })()
-    }, [])
+    }, [rowPerPage])
 
+    const _handleRowPerPageChange = (n: number) => setRowPerPage(n)
+
+    const goNext =  async () => {
+        const response = await getAllEmployee(rowPerPage, lastEK)
+        setPrevLastEK([...prevLastEK, lastEK])
+        setLastEK(response.lastEvaluatedKey)
+        setEmployeeList(response.data)
+    }
+
+    const goBack = async () => {
+        prevLastEK.pop()
+        const response = await getAllEmployee(rowPerPage, prevLastEK[prevLastEK.length-1].length === 0 ? undefined : prevLastEK[prevLastEK.length-1])
+        setPrevLastEK(prevLastEK)
+        setLastEK(response.lastEvaluatedKey)
+        setEmployeeList(response.data)
+    }
 
     return (
         <Box
@@ -72,7 +93,14 @@ export default function Home() {
             </Paper>
 
             <Box marginTop={10}>
-                <EmployeeTable data={employeeList}/>
+                <EmployeeTable
+                    rowPerPage={rowPerPage}
+                    data={employeeList}
+                    handleRowPerPageChange={_handleRowPerPageChange}
+                    goNext={goNext}
+                    disableGoNext={lastEK.length === 0}
+                    goBack={goBack}
+                />
             </Box>
         </Box>
     );
